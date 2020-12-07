@@ -43,10 +43,13 @@ Plug 'junegunn/fzf.vim'
 Plug 'liyechen/vim-agriculture'
 
 Plug 'ap/vim-buftabline'
-" Plug 'itchyny/lightline.vim'
+Plug 'itchyny/lightline.vim'
 
 " On-demand lazy load
 Plug 'liuchengxu/vim-which-key'
+
+" todo manager
+Plug 'wsdjeg/vim-todo'
 
 " Plug 'ryanoasis/vim-devicons'
 
@@ -68,7 +71,7 @@ set guitablabel=%t
 set cursorline
 
 " no bottom status bar
-set ls=0
+set ls=1
 
 " turn hybrid line numbers on
 set number
