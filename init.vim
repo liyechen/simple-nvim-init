@@ -5,6 +5,7 @@ call plug#begin(stdpath('data').'/plugged')
 " color theme
 Plug 'joshdick/onedark.vim'
 Plug 'morhetz/gruvbox'
+Plug 'srcery-colors/srcery-vim'
 
 Plug 'preservim/nerdcommenter'
 " Plug 'vim-airline/vim-airline'
@@ -39,11 +40,14 @@ endif
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
+" find and replace
+Plug 'brooth/far.vim'
 
 Plug 'liyechen/vim-agriculture'
 
 Plug 'ap/vim-buftabline'
 Plug 'itchyny/lightline.vim'
+" Plug 'akinsho/nvim-bufferline.lua'
 
 " On-demand lazy load
 Plug 'liuchengxu/vim-which-key'
@@ -231,6 +235,7 @@ nmap <Leader>f <Plug>AgRawWordUnderCursor
 
 
 nmap <silent> gd <Plug>(coc-definition)
+map <C-]> <Plug>(coc-definition)
 
 """"""""""""""""""""""""""""
 " => vp4
@@ -284,3 +289,16 @@ endif
 nnoremap <silent> <leader> :WhichKey ","<CR>
 set timeoutlen=500
 
+
+""""""""""""""""
+" lightline
+""""""""""""""""
+" let g:lightline = {
+"     \ 'active': {
+"     \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified' ] ],
+"     \ },
+"     \ 'colorscheme': 'seoul256'
+" \ }
+let g:lightline = {
+    \ 'colorscheme': 'seoul256'
+\ }
