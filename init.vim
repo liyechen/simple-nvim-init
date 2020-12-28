@@ -31,6 +31,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " perforce
 Plug 'ngemily/vim-vp4'
 
+Plug 'chaoren/vim-wordmotion'
+
 if has('nvim') || has('patch-8.0.902')
   Plug 'mhinz/vim-signify'
 else
@@ -87,6 +89,9 @@ set guicursor+=a:blinkon0
 set nobackup
 set noswapfile
 se noundofile
+
+" wrapping lines without in the middle of a word
+set linebreak
 
 syntax on
 
