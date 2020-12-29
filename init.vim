@@ -6,6 +6,8 @@ call plug#begin(stdpath('data').'/plugged')
 Plug 'joshdick/onedark.vim'
 Plug 'morhetz/gruvbox'
 Plug 'srcery-colors/srcery-vim'
+Plug 'arzg/vim-colors-xcode'
+Plug 'ayu-theme/ayu-vim'
 
 Plug 'preservim/nerdcommenter'
 " Plug 'vim-airline/vim-airline'
@@ -27,6 +29,9 @@ Plug 'jiangmiao/auto-pairs'
 
 " code complete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" scroll bar in statusline
+Plug 'ojroques/vim-scrollstatus'
 
 " perforce
 Plug 'ngemily/vim-vp4'
@@ -61,7 +66,6 @@ Plug 'wsdjeg/vim-todo'
 
 call plug#end()
 
-set background=dark
 colorscheme gruvbox
 set t_Co=256
 set encoding=utf8
@@ -104,7 +108,7 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
-map <C-g> :vertical resize +3<cr>
+map <C-m> :vertical resize +3<cr>
 map <C-f> :resize +3<cr>
 
 " resize pane
@@ -305,5 +309,34 @@ set timeoutlen=500
 "     \ 'colorscheme': 'seoul256'
 " \ }
 let g:lightline = {
-    \ 'colorscheme': 'seoul256'
+    \ 'colorscheme': 'seoul256',
+    \ 'component_function': {'percent': 'ScrollStatus'}
 \ }
+
+""""""""""""""""
+" signify
+""""""""""""""""
+let g:signify_sign_add    = '┃'
+let g:signify_sign_change = '┃'
+let g:signify_sign_delete = '•'
+
+let g:signify_sign_show_count = 0 " Don’t show the number of deleted lines.
+
+""""""""""""""""
+" gruvbox
+""""""""""""""""
+let g:gruvbox_italic=1
+let g:gruvbox_contrast_dark="hard"
+
+" """"""""""""""""
+" " scrollstatus
+" """"""""""""""""
+" let g:lightline = {
+"   \ 'active': {
+"   \   'right': [['lineinfo'], ['percent'], ['fileformat', 'fileencoding', 'filetype', 'charvaluehex']]
+"   \ },
+"   \ 'component_function': {'percent': 'ScrollStatus'},
+"   \ }
+let g:scrollstatus_symbol_track = '-'
+let g:scrollstatus_symbol_bar = '|'
+
