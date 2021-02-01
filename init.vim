@@ -3,25 +3,21 @@ set nocompatible
 call plug#begin(stdpath('data').'/plugged')
 
 " color theme
-Plug 'joshdick/onedark.vim'
 Plug 'morhetz/gruvbox'
-Plug 'srcery-colors/srcery-vim'
-Plug 'arzg/vim-colors-xcode'
-Plug 'ayu-theme/ayu-vim'
 
 Plug 'preservim/nerdcommenter'
-" Plug 'vim-airline/vim-airline'
 Plug 'preservim/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 
+Plug 'ap/vim-css-color'
 Plug 'luochen1990/rainbow'
+Plug 'mtdl9/vim-log-highlighting'
 
 " Plug 'yegappan/mru'
 Plug 'tpope/vim-fugitive'
 Plug 'majutsushi/tagbar'
 Plug 'craigemery/vim-autotag'
-" Plug 'ctrlpvim/ctrlp.vim'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'fatih/vim-go'
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 
@@ -62,12 +58,13 @@ Plug 'liuchengxu/vim-which-key'
 " todo manager
 Plug 'wsdjeg/vim-todo'
 
-" Plug 'ryanoasis/vim-devicons'
-
 call plug#end()
 
 colorscheme gruvbox
+set background=dark
+" colorscheme onedark 
 set t_Co=256
+set termguicolors
 set encoding=utf8
 set fileencodings=utf8
 set backspace=indent,eol,start
@@ -93,6 +90,7 @@ set guicursor+=a:blinkon0
 set nobackup
 set noswapfile
 se noundofile
+set updatetime=100
 
 " wrapping lines without in the middle of a word
 set linebreak
@@ -108,7 +106,8 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
-map <C-m> :vertical resize +3<cr>
+" map <C-n> :vertical resize -3<cr>
+" map <C-m> :vertical resize +3<cr>
 map <C-f> :resize +3<cr>
 
 " resize pane
@@ -208,7 +207,8 @@ inoremap <silent><expr> <Tab>
 
 " map <C-]> :call CocAction('jumpDefinition')<CR>
 
-let g:coc_global_extensions = ['coc-json', 'coc-python']
+nmap <Leader>e :call CocAction('diagnosticNext')<CR>
+nmap <Leader>q :call CocAction('diagnosticPrevious')<CR>
 
 """"""""""""""""""""""""""""
 " => auto pairs
@@ -219,7 +219,7 @@ let g:AutoPairsMultilineClose = 0
 """"""""""""""""""""""""""""
 " => onedark
 """""""""""""""""""""""""""""
-let g:onedark_terminal_italics = 1
+" let g:onedark_terminal_italics = 1
 
 
 """"""""""""""""""""""""""""
@@ -247,9 +247,8 @@ nmap <silent> gd <Plug>(coc-definition)
 map <C-]> <Plug>(coc-definition)
 
 """"""""""""""""""""""""""""
-" => vp4
+" => signify
 """""""""""""""""""""""""""""
-map <leader>d :Vp4Diff<cr>
 
 
 """"""""""""""""""""""""""""
@@ -257,9 +256,6 @@ map <leader>d :Vp4Diff<cr>
 """""""""""""""""""""""""""""
 let g:rainbow_active=1
 
-set updatetime=100
-
-set updatetime=100
 
 """"""""""""""""""""""""""""""""""""""""""""
 " avoid scrolling window from switch buffers
@@ -322,6 +318,8 @@ let g:signify_sign_delete = '•'
 
 let g:signify_sign_show_count = 0 " Don’t show the number of deleted lines.
 
+map <leader>d :SignifyDiff<cr>
+
 """"""""""""""""
 " gruvbox
 """"""""""""""""
@@ -340,3 +338,10 @@ let g:gruvbox_contrast_dark="hard"
 let g:scrollstatus_symbol_track = '-'
 let g:scrollstatus_symbol_bar = '|'
 
+
+" """"""""""""""""
+" " scrollstatus
+" """"""""""""""""
+" lua vim.api.nvim_set_var("chadtree_ignores", { name = {".*", ".idea"} })
+" map <leader>nn :CHADopen<cr>
+"
