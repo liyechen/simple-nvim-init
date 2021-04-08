@@ -9,6 +9,9 @@ Plug 'preservim/nerdcommenter'
 Plug 'preservim/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 
+" Plug 'glepnir/zephyr-nvim'
+" Plug 'nvim-treesitter/nvim-treesitter'
+
 Plug 'ap/vim-css-color'
 Plug 'luochen1990/rainbow'
 Plug 'mtdl9/vim-log-highlighting'
@@ -27,7 +30,12 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " scroll bar in statusline
-Plug 'ojroques/vim-scrollstatus'
+" Plug 'ojroques/vim-scrollstatus'
+
+Plug 'mhinz/vim-startify'
+
+Plug 'rizzatti/dash.vim'
+Plug 'markonm/traces.vim'
 
 " perforce
 Plug 'ngemily/vim-vp4'
@@ -108,11 +116,10 @@ map <C-l> <C-W>l
 
 " map <C-n> :vertical resize -3<cr>
 " map <C-m> :vertical resize +3<cr>
-map <C-f> :resize +3<cr>
+map <C-f> :vertical resize +3<cr>
 
 " resize pane
 map <leader>q :vertical resize +5<cr>
-
 
 set clipboard=unnamedplus
 
@@ -146,7 +153,7 @@ autocmd FileType yml setlocal ts=2 sts=2 sw=2
 " fzf
 let g:fzf_command_prefix = 'Fzf'
 map <C-p> :FzfFiles<cr>
-let g:fzf_preview_window = ['right:60%', 'ctrl-/']
+let g:fzf_preview_window = ['down:85%', 'ctrl-/']
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.85, 'border': 'sharp' } }
 " map <leader>f :FzfAg<cr>
 
@@ -195,9 +202,10 @@ let g:tagbar_silent = 1
 """"""""""""""""""""""""""""
 " => coc.vim
 """""""""""""""""""""""""""""
+" use <tab> for trigger completion and navigate to the next complete item
 function! s:check_back_space() abort
   let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
+  return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
 
 inoremap <silent><expr> <Tab>
@@ -209,6 +217,7 @@ inoremap <silent><expr> <Tab>
 
 nmap <Leader>e :call CocAction('diagnosticNext')<CR>
 nmap <Leader>q :call CocAction('diagnosticPrevious')<CR>
+" nmap <leader>w :call CocAction('fold')<CR>
 
 """"""""""""""""""""""""""""
 " => auto pairs
@@ -232,6 +241,29 @@ let g:go_highlight_function_calls = 1
 " let g:go_highlight_operators = 1
 let g:go_highlight_extra_types = 1
 
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+map <C-]> <Plug>(coc-definition)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+
 " let g:airline#extensions#tabline#enabled = 1
 " let g:airline#extensions#tabline#formatter = 'default'
 " let g:airline#extensions#tabline#fnamemod = ':t'
@@ -243,8 +275,6 @@ vmap <Leader>f <Plug>AgRawVisualSelection
 nmap <Leader>f <Plug>AgRawWordUnderCursor
 
 
-nmap <silent> gd <Plug>(coc-definition)
-map <C-]> <Plug>(coc-definition)
 
 """"""""""""""""""""""""""""
 " => signify
@@ -335,13 +365,10 @@ let g:gruvbox_contrast_dark="hard"
 "   \ },
 "   \ 'component_function': {'percent': 'ScrollStatus'},
 "   \ }
-let g:scrollstatus_symbol_track = '-'
-let g:scrollstatus_symbol_bar = '|'
+" let g:scrollstatus_symbol_track = '-'
+" let g:scrollstatus_symbol_bar = '|'
 
 
 " """"""""""""""""
-" " scrollstatus
+" " startify
 " """"""""""""""""
-" lua vim.api.nvim_set_var("chadtree_ignores", { name = {".*", ".idea"} })
-" map <leader>nn :CHADopen<cr>
-"
