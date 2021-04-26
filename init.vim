@@ -31,8 +31,16 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " scroll bar in statusline
 " Plug 'ojroques/vim-scrollstatus'
+"
+
+
+" rust
+Plug 'rust-lang/rust.vim'
+
 
 Plug 'mhinz/vim-startify'
+
+Plug 'cespare/vim-toml'
 
 Plug 'rizzatti/dash.vim'
 Plug 'markonm/traces.vim'
@@ -149,6 +157,7 @@ autocmd FileType javascript setlocal ts=2 sts=2 sw=2
 autocmd FileType typescript setlocal ts=2 sts=2 sw=2
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2
 autocmd FileType yml setlocal ts=2 sts=2 sw=2
+autocmd FileType toml setlocal ts=2 sts=2 sw=2
 
 " fzf
 let g:fzf_command_prefix = 'Fzf'
@@ -370,5 +379,6 @@ let g:gruvbox_contrast_dark="hard"
 
 
 " """"""""""""""""
-" " startify
+" " rust.vim
 " """"""""""""""""
+let g:rustfmt_autosave = 1
