@@ -33,6 +33,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'ojroques/vim-scrollstatus'
 "
 
+" common lisp
+Plug 'vlime/vlime', {'rtp': 'vim/'}
 
 " rust
 Plug 'rust-lang/rust.vim'
@@ -162,8 +164,8 @@ autocmd FileType toml setlocal ts=2 sts=2 sw=2
 " fzf
 let g:fzf_command_prefix = 'Fzf'
 map <C-p> :FzfFiles<cr>
-let g:fzf_preview_window = ['down:85%', 'ctrl-/']
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.85, 'border': 'sharp' } }
+let g:fzf_preview_window = ['down:83%', 'ctrl-/']
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.88, 'border': 'sharp' } }
 " map <leader>f :FzfAg<cr>
 
 set mouse=a
