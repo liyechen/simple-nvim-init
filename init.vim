@@ -9,6 +9,11 @@ Plug 'preservim/nerdcommenter'
 Plug 'preservim/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 
+Plug 'unblevable/quick-scope'
+
+" Plug 'kamykn/spelunker.vim'
+" Plug 'kamykn/popup-menu.nvim'
+
 " Plug 'glepnir/zephyr-nvim'
 " Plug 'nvim-treesitter/nvim-treesitter'
 
@@ -224,6 +229,19 @@ inoremap <silent><expr> <Tab>
       \ <SID>check_back_space() ? "\<Tab>" :
       \ coc#refresh()
 
+" inoremap <silent><expr> <TAB>
+"       \ pumvisible() ? coc#_select_confirm() :
+"       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+"       \ <SID>check_back_space() ? "\<TAB>" :
+"       \ coc#refresh()
+
+" function! s:check_back_space() abort
+"   let col = col('.') - 1
+"   return !col || getline('.')[col - 1]  =~# '\s'
+" endfunction
+
+" let g:coc_snippet_next = '<tab>'
+
 " map <C-]> :call CocAction('jumpDefinition')<CR>
 
 nmap <Leader>e :call CocAction('diagnosticNext')<CR>
@@ -384,3 +402,20 @@ let g:gruvbox_contrast_dark="hard"
 " " rust.vim
 " """"""""""""""""
 let g:rustfmt_autosave = 1
+
+" coc-snippets
+" map <leader>l <Plug>(coc-snippets-expand)
+" vmap <C-j> <Plug>(coc-snippets-select)
+
+
+""""""""""""""""
+" spell
+""""""""""""""""
+" let g:spelunker_max_suggest_words = 6
+" let g:spelunker_disable_email_checking = 1
+" let g:spelunker_disable_uri_checking = 1
+" let g:spelunker_white_list_for_user = ['garena', 'vimrc', 'plugin', 'plugins', 'Plugin', 'Plugins']
+
+
+let g:qs_highlight_on_keys = ['f', 'F']
+
