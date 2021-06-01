@@ -8,35 +8,24 @@ Plug 'morhetz/gruvbox'
 Plug 'preservim/nerdcommenter'
 Plug 'preservim/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
-
 Plug 'unblevable/quick-scope'
-
-" Plug 'kamykn/spelunker.vim'
-" Plug 'kamykn/popup-menu.nvim'
-
-" Plug 'glepnir/zephyr-nvim'
-" Plug 'nvim-treesitter/nvim-treesitter'
-
 Plug 'ap/vim-css-color'
 Plug 'luochen1990/rainbow'
 Plug 'mtdl9/vim-log-highlighting'
-
-" Plug 'yegappan/mru'
 Plug 'tpope/vim-fugitive'
 Plug 'majutsushi/tagbar'
 Plug 'craigemery/vim-autotag'
 Plug 'fatih/vim-go'
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
-
-" Plug 'uarun/vim-protobuf'
+Plug 'mhinz/vim-startify'
+Plug 'cespare/vim-toml'
+Plug 'rizzatti/dash.vim'
+Plug 'markonm/traces.vim'
+Plug 'chaoren/vim-wordmotion'
 
 " code complete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-" scroll bar in statusline
-" Plug 'ojroques/vim-scrollstatus'
-"
 
 " common lisp
 Plug 'vlime/vlime', {'rtp': 'vim/'}
@@ -44,18 +33,17 @@ Plug 'vlime/vlime', {'rtp': 'vim/'}
 " rust
 Plug 'rust-lang/rust.vim'
 
-
-Plug 'mhinz/vim-startify'
-
-Plug 'cespare/vim-toml'
-
-Plug 'rizzatti/dash.vim'
-Plug 'markonm/traces.vim'
-
 " perforce
 Plug 'ngemily/vim-vp4'
 
-Plug 'chaoren/vim-wordmotion'
+" Plug 'kamykn/spelunker.vim'
+" Plug 'kamykn/popup-menu.nvim'
+" Plug 'glepnir/zephyr-nvim'
+" Plug 'nvim-treesitter/nvim-treesitter'
+" Plug 'yegappan/mru'
+" Plug 'uarun/vim-protobuf'
+" scroll bar in statusline
+" Plug 'ojroques/vim-scrollstatus'
 
 if has('nvim') || has('patch-8.0.902')
   Plug 'mhinz/vim-signify'
@@ -130,7 +118,7 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 " map <C-n> :vertical resize -3<cr>
-" map <C-m> :vertical resize +3<cr>
+map <C-s> :vertical resize -3<cr>
 map <C-f> :vertical resize +3<cr>
 
 " resize pane
