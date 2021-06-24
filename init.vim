@@ -4,6 +4,7 @@ call plug#begin(stdpath('data').'/plugged')
 
 " color theme
 Plug 'morhetz/gruvbox'
+Plug 'axvr/photon.vim'
 
 Plug 'preservim/nerdcommenter'
 Plug 'preservim/nerdtree'
@@ -23,6 +24,7 @@ Plug 'cespare/vim-toml'
 Plug 'rizzatti/dash.vim'
 Plug 'markonm/traces.vim'
 Plug 'chaoren/vim-wordmotion'
+Plug 'rhysd/git-messenger.vim'
 
 " code complete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -71,6 +73,7 @@ Plug 'wsdjeg/vim-todo'
 
 call plug#end()
 
+" colorscheme photon
 colorscheme gruvbox
 set background=dark
 " colorscheme onedark 
@@ -404,6 +407,9 @@ let g:rustfmt_autosave = 1
 " let g:spelunker_disable_uri_checking = 1
 " let g:spelunker_white_list_for_user = ['garena', 'vimrc', 'plugin', 'plugins', 'Plugin', 'Plugins']
 
-
+" Plug 'unblevable/quick-scope'
 let g:qs_highlight_on_keys = ['f', 'F']
 
+" todo manager
+" wsdjeg/vim-todo
+match Todo /@todo/
