@@ -34,6 +34,13 @@ Plug 'junegunn/vim-easy-align'
 " LSP for neovim >= 0.5.0
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
+" dependencies
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+" telescope
+Plug 'nvim-telescope/telescope.nvim'
 
 " common lisp
 Plug 'vlime/vlime', {'rtp': 'vim/'}
@@ -59,13 +66,13 @@ else
   Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
 endif
 
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+" Plug 'junegunn/fzf.vim'
 
 " find and replace
 Plug 'brooth/far.vim'
 
-Plug 'liyechen/vim-agriculture'
+" Plug 'liyechen/vim-agriculture'
 
 Plug 'ap/vim-buftabline'
 Plug 'itchyny/lightline.vim'
@@ -165,11 +172,11 @@ autocmd FileType yml setlocal ts=2 sts=2 sw=2
 autocmd FileType toml setlocal ts=2 sts=2 sw=2
 
 " fzf
-let g:fzf_command_prefix = 'Fzf'
-map <C-p> :FzfFiles<cr>
-let g:fzf_preview_window = ['down:83%', 'ctrl-/']
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.88, 'border': 'sharp' } }
-" map <leader>f :FzfAg<cr>
+" let g:fzf_command_prefix = 'Fzf'
+" " map <C-p> :FzfFiles<cr>
+" let g:fzf_preview_window = ['down:83%', 'ctrl-/']
+" let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.88, 'border': 'sharp' } }
+" " map <leader>f :FzfAg<cr>
 
 set mouse=a
 
@@ -283,8 +290,8 @@ let g:go_highlight_extra_types = 1
 
 " fzf arch
 " nmap <Leader>/ <Plug>AgRawSearch
-vmap <Leader>f <Plug>AgRawVisualSelection
-nmap <Leader>f <Plug>AgRawWordUnderCursor
+" vmap <Leader>f <Plug>AgRawVisualSelection
+" nmap <Leader>f <Plug>AgRawWordUnderCursor
 
 
 
@@ -444,7 +451,6 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
--- local servers = { "pyright", "rust_analyzer", "tsserver" }
 local servers = { 'pyright', 'gopls', 'rust_analyzer', 'clangd' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
@@ -455,15 +461,7 @@ for _, lsp in ipairs(servers) do
   }
 end
 
-local t = function(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
-
-local check_back_space = function()
-    local col = vim.fn.col('.') - 1
-    return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
-end
-
+-- comp
 vim.o.completeopt = "menuone,noselect"
 require'compe'.setup {
   enabled = true;
@@ -499,10 +497,15 @@ require'compe'.setup {
   };
 }
 
+local t = function(str)
+  return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
 
--- Use (s-)tab to:
---- move to prev/next item in completion menuone
---- jump to prev/next snippet's placeholder
+local check_back_space = function()
+    local col = vim.fn.col('.') - 1
+    return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
+end
+
 _G.tab_complete = function()
   if vim.fn.pumvisible() == 1 then
     return t "<C-n>"
@@ -514,6 +517,7 @@ _G.tab_complete = function()
     return vim.fn['compe#complete']()
   end
 end
+
 _G.s_tab_complete = function()
   if vim.fn.pumvisible() == 1 then
     return t "<C-p>"
@@ -525,13 +529,72 @@ _G.s_tab_complete = function()
   end
 end
 
-
 vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 EOF
 
-" inoremap <silent><expr> <C-Space> compe#complete()
+" C-y to confirm
 inoremap <silent><expr> <C-y>      compe#confirm('<CR>')
-" inoremap <silent><expr> <C-y>      compe#complete()
+
+
+" lua
+lua << EOF
+require('telescope').setup{
+  defaults = {
+    vimgrep_arguments = {
+      'rg',
+      '--color=never',
+      '--no-heading',
+      '--with-filename',
+      '--line-number',
+      '--column',
+      '--smart-case'
+    },
+    prompt_prefix = "> ",
+    selection_caret = "> ",
+    entry_prefix = "  ",
+    initial_mode = "insert",
+    selection_strategy = "reset",
+    sorting_strategy = "descending",
+    layout_strategy = "horizontal",
+    layout_config = {
+      horizontal = {
+        mirror = false,
+      },
+      vertical = {
+        mirror = false,
+      },
+    },
+    file_sorter =  require'telescope.sorters'.get_fuzzy_file,
+    file_ignore_patterns = {
+        "vendor/*",
+        "**/*.pb.go",
+    },
+    generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
+    shorten_path = true,
+    winblend = 0,
+    border = {},
+    borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+    color_devicons = true,
+    use_less = true,
+    set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
+    file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
+    grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
+    qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
+
+    -- Developer configurations: Not meant for general override
+    buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
+  }
+}
+EOF
+
+" Using lua functions
+nnoremap <C-p> <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+nnoremap <leader>sp <cmd>lua require('telescope.builtin').spell_suggest()<cr>
+nmap <leader>f <cmd>lua require('telescope.builtin').grep_string()<cr>
+" vmap <leader>f <cmd>lua require('telescope.builtin').grep_string()<cr>
