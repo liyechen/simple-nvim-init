@@ -25,6 +25,7 @@ Plug 'rizzatti/dash.vim'
 Plug 'markonm/traces.vim'
 Plug 'chaoren/vim-wordmotion'
 Plug 'rhysd/git-messenger.vim'
+Plug 'junegunn/vim-easy-align'
 
 " code complete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
