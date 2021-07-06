@@ -3,7 +3,7 @@ set nocompatible
 call plug#begin(stdpath('data').'/plugged')
 
 " color theme
-Plug 'morhetz/gruvbox'
+Plug 'liyechen/gruvbox'
 Plug 'axvr/photon.vim'
 
 Plug 'preservim/nerdcommenter'
