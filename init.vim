@@ -138,9 +138,6 @@ map <C-l> <C-W>l
 map <C-s> :vertical resize -3<cr>
 map <C-f> :vertical resize +3<cr>
 
-" resize pane
-map <leader>q :vertical resize +5<cr>
-
 set clipboard=unnamedplus
 
 let mapleader = ","
@@ -150,8 +147,8 @@ let mapleader = ","
 " map <C-]> <Plug>(coc-definition)
 
 " Useful mappings for managing tabs
-map <leader>o :tabnew<cr>
-map <leader>p :tabonly<cr>
+" map <leader>o :tabnew<cr>
+" map <leader>p :tabonly<cr>
 
 
 " map <C-q> :tabp<cr>
