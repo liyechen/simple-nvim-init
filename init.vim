@@ -286,7 +286,7 @@ let g:go_highlight_extra_types = 1
 
 
 " fzf arch
-nmap <Leader>/ <Plug>AgRawSearch
+" nmap <Leader>/ <Plug>AgRawSearch
 vmap <Leader>f <Plug>AgRawVisualSelection
 nmap <Leader>f <Plug>AgRawWordUnderCursor
 
