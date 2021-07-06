@@ -37,10 +37,10 @@ Plug 'hrsh7th/nvim-compe'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
 " dependencies
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
+" Plug 'nvim-lua/popup.nvim'
+" Plug 'nvim-lua/plenary.nvim'
 " telescope
-Plug 'nvim-telescope/telescope.nvim'
+" Plug 'nvim-telescope/telescope.nvim'
 
 " common lisp
 Plug 'vlime/vlime', {'rtp': 'vim/'}
@@ -66,13 +66,13 @@ else
   Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
 endif
 
-" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-" Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 " find and replace
 Plug 'brooth/far.vim'
 
-" Plug 'liyechen/vim-agriculture'
+Plug 'liyechen/vim-agriculture'
 
 Plug 'ap/vim-buftabline'
 Plug 'itchyny/lightline.vim'
@@ -169,11 +169,11 @@ autocmd FileType yml setlocal ts=2 sts=2 sw=2
 autocmd FileType toml setlocal ts=2 sts=2 sw=2
 
 " fzf
-" let g:fzf_command_prefix = 'Fzf'
-" " map <C-p> :FzfFiles<cr>
-" let g:fzf_preview_window = ['down:83%', 'ctrl-/']
-" let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.88, 'border': 'sharp' } }
-" " map <leader>f :FzfAg<cr>
+let g:fzf_command_prefix = 'Fzf'
+map <C-p> :FzfFiles<cr>
+let g:fzf_preview_window = ['down:83%', 'ctrl-/']
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.88, 'border': 'sharp' } }
+" map <leader>f :FzfAg<cr>
 
 set mouse=a
 
@@ -286,9 +286,9 @@ let g:go_highlight_extra_types = 1
 
 
 " fzf arch
-" nmap <Leader>/ <Plug>AgRawSearch
-" vmap <Leader>f <Plug>AgRawVisualSelection
-" nmap <Leader>f <Plug>AgRawWordUnderCursor
+nmap <Leader>/ <Plug>AgRawSearch
+vmap <Leader>f <Plug>AgRawVisualSelection
+nmap <Leader>f <Plug>AgRawWordUnderCursor
 
 
 
@@ -549,6 +549,7 @@ inoremap <silent><expr> <C-y>      compe#confirm('<CR>')
 
 " lua
 lua << EOF
+--[[
 require('telescope').setup{
   defaults = {
     vimgrep_arguments = {
@@ -596,14 +597,15 @@ require('telescope').setup{
     buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
   }
 }
+--]]
 EOF
 
 " Using lua functions
-nnoremap <C-p> <cmd>lua require('telescope.builtin').find_files()<cr>
-nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
-nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
-nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
-nnoremap <leader>sp <cmd>lua require('telescope.builtin').spell_suggest()<cr>
+" nnoremap <C-p> <cmd>lua require('telescope.builtin').find_files()<cr>
+" nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+" nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+" nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+" nnoremap <leader>sp <cmd>lua require('telescope.builtin').spell_suggest()<cr>
 " nmap <leader>f <cmd>lua require('telescope.builtin').grep_string()<cr>
 " vmap <leader>f <cmd>lua require('telescope.builtin').grep_string()<cr>
 
