@@ -16,7 +16,7 @@ Plug 'mtdl9/vim-log-highlighting'
 Plug 'tpope/vim-fugitive'
 Plug 'majutsushi/tagbar'
 Plug 'craigemery/vim-autotag'
-Plug 'fatih/vim-go'
+" Plug 'fatih/vim-go'
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 Plug 'mhinz/vim-startify'
@@ -36,6 +36,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " dependencies
 " Plug 'nvim-lua/popup.nvim'
 " Plug 'nvim-lua/plenary.nvim'
@@ -272,12 +273,12 @@ let g:AutoPairsMultilineClose = 0
 """"""""""""""""""""""""""""
 " => vim-go
 """""""""""""""""""""""""""""
-let g:go_highlight_types=1
-" let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_function_calls = 1
-" let g:go_highlight_operators = 1
-let g:go_highlight_extra_types = 1
+" let g:go_highlight_types=1
+" " let g:go_highlight_fields = 1
+" let g:go_highlight_functions = 1
+" let g:go_highlight_function_calls = 1
+" " let g:go_highlight_operators = 1
+" let g:go_highlight_extra_types = 1
 
 
 " let g:airline#extensions#tabline#enabled = 1
@@ -537,6 +538,10 @@ _G.s_tab_complete = function()
   end
 end
 
+-- vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
+-- vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
+-- vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+-- vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
@@ -634,3 +639,14 @@ EOF
 " nmap        S   <Plug>(vsnip-cut-text)
 " xmap        S   <Plug>(vsnip-cut-text)
 
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = {"go","gomod"}, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  ignore_install = { "javascript" }, -- List of parsers to ignore installing
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    disable = { "c", "rust" },  -- list of language that will be disabled
+  },
+}
+EOF
