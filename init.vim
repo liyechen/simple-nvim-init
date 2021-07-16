@@ -38,6 +38,8 @@ Plug 'hrsh7th/nvim-compe'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+Plug 'ray-x/go.nvim' " for gofmt
 " dependencies
 " Plug 'nvim-lua/popup.nvim'
 " Plug 'nvim-lua/plenary.nvim'
@@ -554,6 +556,12 @@ vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 EOF
 
+" lua
+lua << EOF
+require('go').setup()
+require("go.format").gofmt()
+EOF
+
 " C-y to confirm
 inoremap <silent><expr> <C-y>      compe#confirm('<CR>')
 
@@ -656,3 +664,6 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 EOF
+
+
+autocmd BufWritePre *.go :silent! lua require('go.format').gofmt()
